@@ -42,19 +42,6 @@ class _ArtDetailPageState extends State<ArtDetailPage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  //Row(
-                  //  mainAxisAlignment: MainAxisAlignment.start,
-                  //  children: [
-                  //    const SizedBox(width: 200,),
-                  //    const Text(
-                  //      'Кто',
-                  //      style: TextStyle(
-                  //        fontSize: 15,
-                  //        color: Colors.grey,
-                  //      ),
-                  //    ),
-                  //  ],
-                  //),
                   Text(
                     widget.author,
                     style: const TextStyle(fontSize: 25),

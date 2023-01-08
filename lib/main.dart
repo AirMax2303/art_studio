@@ -154,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          ifTap == true ? const CatalogPage() : NewsPage(),
+          ifTap == true ? CatalogPage() : NewsPage(),
           //Expanded(
           //  child: GridView.count(
           //    crossAxisCount: 4,
