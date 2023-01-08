@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'art_model.dart';
 import 'art_detail_page.dart';
+import 'news_page.dart';
+import 'dart:io';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Маркетплейс',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -29,32 +31,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool ifTap = true;
+
+  void _setPage1() {
+    setState(() {
+      setState(() {
+        ifTap = true;
+      });
+    });
+  }
+
+  void _setPage2() {
+    setState(() {
+      setState(() {
+        ifTap = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: AppBar(
-      //  title: const Text('Маркетплейс'),
-      //  leading: const Text('Каталог'),
-      //  actions: const <Widget>[
-      //    Text('actions_1'),
-      //    Text('actions_2'),
-      //    Text('actions_3'),
-      //  ],
-      //),
-      //body: GridView.builder(
-      //  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-      //    maxCrossAxisExtent: 450,
-      //    childAspectRatio: 0.8,
-      //  ),
-      //  itemCount: arts.length,
-      //  itemBuilder: (BuildContext context, int index) {
-      //    return ArtCard(
-      //        url: arts[index].url,
-      //        price: arts[index].price,
-      //        author: arts[index].author,
-      //        name: arts[index].name);
-      //  },
-      //),
       body: Column(
         children: [
           Container(
@@ -115,31 +112,41 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 30,
                   ),
                   Row(
-                    children: const [
-                      Text(
-                        'Каталог',
-                        style: TextStyle(color: Colors.white),
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          _setPage1();
+                        },
+                        child: const Text(
+                          'Каталог',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 50.0,
                       ),
-                      Text(
+                      const Text(
                         'Выставки',
                         style: TextStyle(color: Colors.white),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 50.0,
                       ),
-                      Text(
+                      const Text(
                         'Календарь',
                         style: TextStyle(color: Colors.white),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 50.0,
                       ),
-                      Text(
-                        'Новости',
-                        style: TextStyle(color: Colors.white),
+                      InkWell(
+                        onTap: () {
+                          _setPage2();
+                        },
+                        child: const Text(
+                          'Новости',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
@@ -147,25 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 40),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                ),
-                itemCount: arts.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ArtCard(
-                      url: arts[index].url,
-                      price: arts[index].price,
-                      author: arts[index].author,
-                      name: arts[index].name);
-                },
-              ),
-            ),
-          ),
-
+          ifTap == true ? const CatalogPage() : NewsPage(),
           //Expanded(
           //  child: GridView.count(
           //    crossAxisCount: 4,
@@ -225,7 +214,7 @@ class ArtCard extends StatelessWidget {
                 height: 10.0,
               ),
               Text(
-                '$priceР',
+                price,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 softWrap: false,
@@ -258,6 +247,37 @@ class ArtCard extends StatelessWidget {
           ),
         ),
       ), //child: Column(
+    );
+  }
+}
+
+class CatalogPage extends StatefulWidget {
+  const CatalogPage({Key? key}) : super(key: key);
+
+  @override
+  State<CatalogPage> createState() => _CatalogPageState();
+}
+
+class _CatalogPageState extends State<CatalogPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 40),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
+          itemCount: arts.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ArtCard(
+                url: arts[index].url,
+                price: arts[index].price,
+                author: arts[index].author,
+                name: arts[index].name);
+          },
+        ),
+      ),
     );
   }
 }
