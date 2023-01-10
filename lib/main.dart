@@ -1,7 +1,9 @@
+import 'package:art_studio/login_page.dart';
 import 'package:flutter/material.dart';
 import 'art_model.dart';
 import 'art_detail_page.dart';
 import 'news_page.dart';
+import 'registration_page.dart';
 import 'dart:io';
 
 void main() {
@@ -79,29 +81,45 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             'Оплата и доставка',
                             style: TextStyle(color: Colors.white),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 50.0,
                           ),
-                          Text(
-                            'Войти',
-                            style: TextStyle(color: Colors.white),
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const Expanded(
+                                        child: LoginPage(),
+                                      )));
+                            },
+                            child: const Text(
+                              'Войти',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 50.0,
                           ),
-                          Text(
-                            'Регистрация',
-                            style: TextStyle(color: Colors.white),
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const Expanded(
+                                        child: RegistrationPage(),
+                                      )));
+                            },
+                            child: const Text(
+                              'Регистрация',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 50.0,
                           ),
-                          Text(
+                          const Text(
                             'Корзина',
                             style: TextStyle(color: Colors.white),
                           ),
@@ -155,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          ifTap == true ? CatalogPage() : NewsPage(),
+          ifTap == true ? const CatalogPage() : const NewsPage(),
           //Expanded(
           //  child: GridView.count(
           //    crossAxisCount: 4,
